@@ -81,6 +81,8 @@ public class BezierCurveCollider_Editor : Editor {
     void OnSceneGUI()
     {
         GUI.changed = false;
+
+        var prevColour = Handles.color;
         Handles.color = Color.yellow;
 
         // manage control points (transform into world space)
@@ -239,11 +241,20 @@ public class BezierCurveCollider_Editor : Editor {
             bc.handlerPoints = handlerPoints;
         }
 
+        // draw the points on the curve
+        Handles.color = Color.green;
+        foreach (Vector2 point in bc.edge.points)
+        {
+            Handles.SphereHandleCap(0, bc.transform.TransformPoint(point), Quaternion.identity, 0.03f, EventType.Repaint);
+        }
+
         // draw
         if (GUI.changed)
         {
             bc.drawCurve();
         }
+
+        Handles.color = prevColour;
     }
 
     private void TransformPointsToWorldSpace(ref List<Vector2> points, Transform tf)
