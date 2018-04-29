@@ -66,7 +66,7 @@ public class BezierCurveCollider2D : MonoBehaviour {
         controlPoints.Clear();
         handlerPoints.Clear();
 
-        Vector2 pos = transform.localPosition;        
+        var pos = Vector2.zero;
         controlPoints.Add(pos);
 
         pos.x += 4;
